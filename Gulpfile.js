@@ -2,6 +2,14 @@ import gulp from "gulp";
 import { rimraf } from "rimraf";
 import gulpImageMin from "gulp-imagemin";
 import gulpHtmlMin from "gulp-htmlmin";
+import gulpCleanCss from "gulp-clean-css";
+
+const processCss = async () => {
+    return gulp
+        .src("src/assets/css/**/*.css", { sourcemaps: true })
+        .pipe(gulpCleanCss())
+        .pipe(gulp.dest("dist/assets/css/", { sourcemaps: "." }));
+};
 
 const clean = async () => {
     return rimraf("dist/");
@@ -35,12 +43,13 @@ const processFonts = async () => {
 
 const build = gulp.series(
     clean,
-    gulp.parallel(processFonts, processImages, processHtml)
+    gulp.parallel(processCss, processFonts, processImages, processHtml)
 );
 
 export {
     clean,
     build,
+    processCss as "process-css",
     processImages as "process-images",
     processFonts as "process-fonts",
     processHtml as "process-html",
