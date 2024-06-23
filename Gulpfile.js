@@ -3,10 +3,12 @@ import { rimraf } from "rimraf";
 import gulpImageMin from "gulp-imagemin";
 import gulpHtmlMin from "gulp-htmlmin";
 import gulpCleanCss from "gulp-clean-css";
+import gulpAutoprefixer from "gulp-autoprefixer";
 
 const processCss = async () => {
     return gulp
         .src("src/assets/css/**/*.css", { sourcemaps: true })
+        .pipe(gulpAutoprefixer())
         .pipe(gulpCleanCss())
         .pipe(gulp.dest("dist/assets/css/", { sourcemaps: "." }));
 };
