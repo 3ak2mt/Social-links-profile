@@ -1,6 +1,7 @@
 import gulp from "gulp";
 import { rimraf } from "rimraf";
 import gulpImageMin from "gulp-imagemin";
+import gulpHtmlMin from "gulp-htmlmin";
 
 const clean = async () => {
     return rimraf("dist/");
@@ -13,8 +14,25 @@ const processImages = async () => {
         .pipe(gulp.dest("dist/assets/images/"));
 };
 
-const build = async () => {
-    return console.log("test");
+const processHtml = async () => {
+    const minifOptions = {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeOptionalTags: true,
+    };
+
+    return gulp
+        .src("src/index.html")
+        .pipe(gulpHtmlMin(minifOptions))
+        .pipe(gulp.dest("dist/"));
 };
 
-export { clean, processImages as "process-images", build as default };
+const build = gulp.series(clean, gulp.parallel(processImages, processHtml));
+
+export {
+    clean,
+    build,
+    processImages as "process-images",
+    processHtml as "process-html",
+    build as default,
+};
