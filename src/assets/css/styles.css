@@ -178,6 +178,9 @@
 }
 
 .card__link {
+    /* color */
+    color: var(--cr-white);
+
     /* display */
     display: block;
 
@@ -187,6 +190,7 @@
     /* typography */
     font-weight: var(--font-weight-700);
     text-align: center;
+    text-decoration: none;
 }
 
 .card__link:hover {
@@ -217,6 +221,9 @@
 }
 
 .footer__link {
+    /* color */
+    color: inherit;
+
     /* typography */
     text-decoration: underline;
 }
