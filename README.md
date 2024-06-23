@@ -28,11 +28,18 @@ Users should be able to:
 ### Links
 
 - Solution URL: [Frontend Mentor](https://your-solution-url.com)
-- Live Site URL: [GitHub Pages](https://your-live-site-url.com)
+- Live Site URL: [GitHub Pages](https://3ak2mt.github.io/social-links-profile/)
 
 ## My process
 
 ### Built with
+
+- CSS Custom Properties
+- Flexbox
+- Grid
+- GulpJS
+- Mobile First
+- Bob
 
 ## Author
 
