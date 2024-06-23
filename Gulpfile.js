@@ -22,17 +22,27 @@ const processHtml = async () => {
     };
 
     return gulp
-        .src("src/index.html")
+        .src("src/index.html", { sourcemaps: true })
         .pipe(gulpHtmlMin(minifOptions))
-        .pipe(gulp.dest("dist/"));
+        .pipe(gulp.dest("dist/", { sourcemaps: "." }));
 };
 
-const build = gulp.series(clean, gulp.parallel(processImages, processHtml));
+const processFonts = async () => {
+    return gulp
+        .src("src/assets/fonts/**/*.woff2", { removeBOM: false })
+        .pipe(gulp.dest("dist/assets/fonts/"));
+};
+
+const build = gulp.series(
+    clean,
+    gulp.parallel(processFonts, processImages, processHtml)
+);
 
 export {
     clean,
     build,
     processImages as "process-images",
+    processFonts as "process-fonts",
     processHtml as "process-html",
     build as default,
 };
